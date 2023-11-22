@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const deviceRoute = require("./routes/device.js");
 
 require("dotenv").config();
 require("./db/conn.js");
+
+const deviceRoute = require("./routes/device");
+
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
