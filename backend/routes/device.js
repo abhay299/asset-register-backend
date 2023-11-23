@@ -1,35 +1,23 @@
 const router = require("express").Router();
-const Data = require("../models/sysData");
+const Data = require("../models/Data.js");
 
 // Create Device
-// router.post("/", verifyTokenAndAdmin, async (req, res) => {
-//   const newDevice = new Device(req.body);
+router.post("/", async (req, res) => {
+  const newDevice = new Data(req.body);
 
-//   try {
-//     const savedDevice = await newDevice.save();
-//     res.status(200).json(savedDevice);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const savedDevice = await newDevice.save();
+    res.status(200).json(savedDevice);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/", async (req, res) => {
   try {
     // Retrieve data from the collection
     const documents = await Data.find({}).exec();
     console.log("DATA =>", documents);
-    // Display data on a simple HTML page
-    // res.send(`
-    //         <html>
-    //         <head>
-    //             <title>Data from MongoDB</title>
-    //         </head>
-    //         <body>
-    //             <h1>Data from MongoDB</h1>
-    //             <pre>${JSON.stringify(documents, null, 2)}</pre>
-    //         </body>
-    //         </html>
-    //     `);
     res.status(200).json(documents);
   } catch (error) {
     res.status(500).send(`Error: ${error.message}`);
