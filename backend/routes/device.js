@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     // Retrieve data from the collection
-    const documents = await Data.find({}).exec();
+    const documents = await Data.find({});
     console.log("DATA =>", documents);
     res.status(200).json(documents);
   } catch (error) {
